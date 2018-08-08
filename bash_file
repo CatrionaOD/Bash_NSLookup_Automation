@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while IFS='' read -r line || [[ -n "$line" ]]; do
+    
+  NAME=${line#https://}	# Delete pattern "https://"
+  SEARCHABLE="$( cut -d '/' -f 1 <<< "$NAME" )"
+  
+  echo "`nslookup $SEARCHABLE`"
+done < "$1"
